@@ -5,9 +5,39 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/api/chats
-  body: none
-  auth: inherit
+  url: POST https://refugechat-fhfxdxbhgqcbdhf9.canadacentral-01.azurewebsites.net/api/users/add
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJpYXQiOjE3NjUyMzI3NTJ9.PvW6wUMMjoNFxAflLBqS7OQSDfFF9P6yYixUamejGMs
+}
+
+body:json {
+  {
+    "nom": "Mimi",
+    "race": "Persan",
+    "numeroDossier": 123456,
+    "dateNaissance": "2020-05-10",
+      
+    "tauxEnergie": 4,
+    "sociabiliteHumain": 5,
+    "compatEnfants": 4,
+    "compatChiens": 3,
+    "compatChats": 5,
+  
+    "description": "Chat très sociable et affectueux.",
+  
+    "micropuce": true,
+    "sterilise": true,
+    "vaccinsBase": true,
+  
+    "photos": [
+      "https://exemple.com/chat1.jpg"
+    ]
+  }
+  
 }
 
 settings {
