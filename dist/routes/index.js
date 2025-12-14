@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const Paths_1 = __importDefault(require("@src/common/constants/Paths"));
+const ChatRoutes_1 = __importDefault(require("./ChatRoutes"));
+const UserRoutes_1 = __importDefault(require("./UserRoutes"));
+const AuthRoutes_1 = __importDefault(require("./AuthRoutes"));
+const authenticateToken_1 = __importDefault(require("@src/services/authenticateToken"));
+const apiRouter = (0, express_1.Router)();
+const userRouter = (0, express_1.Router)();
+userRouter.get(Paths_1.default.Users.Get, UserRoutes_1.default.getAll);
+userRouter.post(Paths_1.default.Users.Add, UserRoutes_1.default.add);
+apiRouter.use(Paths_1.default.Users.Base, userRouter);
+const authRouter = (0, express_1.Router)();
+authRouter.post(Paths_1.default.Auth.GenerateToken, AuthRoutes_1.default.generateToken);
+apiRouter.use(Paths_1.default.Auth.Base, authRouter);
+const chatRouter = (0, express_1.Router)();
+chatRouter.get(Paths_1.default.Chats.Get, ChatRoutes_1.default.getAll);
+chatRouter.get('/', ChatRoutes_1.default.getFiltered);
+chatRouter.get(Paths_1.default.Chats.GetOne, ChatRoutes_1.default.getOne);
+chatRouter.post(Paths_1.default.Chats.Add, authenticateToken_1.default, ChatRoutes_1.default.add);
+chatRouter.put(Paths_1.default.Chats.Update, authenticateToken_1.default, ChatRoutes_1.default.update);
+chatRouter.delete(Paths_1.default.Chats.Delete, authenticateToken_1.default, ChatRoutes_1.default.delete);
+apiRouter.use(Paths_1.default.Chats.Base, chatRouter);
+exports.default = apiRouter;
