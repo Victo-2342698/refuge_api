@@ -1,19 +1,36 @@
 import UserService from './UserService';
 import jwt from 'jsonwebtoken';
-import ENV from '@src/common/constants/ENV';
 
-interface IUserLogin {
+async function generateToken({
+  email,
+  password,
+}: {
   email: string;
   password: string;
-}
+}) {
+  console.log('LOGIN EMAIL REÇU:', email);
+  console.log('LOGIN PASSWORD REÇU:', password);
 
-export async function generateToken(data: IUserLogin): Promise<string> {
-  const user = await UserService.getByEmail(data.email);
+  const user = await UserService.getByEmail(email);
+  console.log('USER TROUVÉ:', user);
 
-  if (!user) return '';
-  if (user.password !== data.password) return '';
+  if (!user) {
+    console.log('❌ USER NON TROUVÉ');
+    return null;
+  }
 
-  return jwt.sign({ email: user.email }, ENV.Jwtsecret as string);
+  if (password !== user.password) {
+    console.log('❌ MOT DE PASSE INCORRECT');
+    return null;
+  }
+
+  console.log('✅ AUTH OK');
+
+  return jwt.sign(
+    { email: user.email, name: user.name },
+    process.env.JWTSECRET as string,
+    { expiresIn: '1h' },
+  );
 }
 
 export default { generateToken };
