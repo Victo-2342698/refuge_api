@@ -15,16 +15,16 @@ async function generateToken({
   console.log('USER TROUVÉ:', user);
 
   if (!user) {
-    console.log('❌ USER NON TROUVÉ');
+    console.log('USER NON TROUVÉ');
     return null;
   }
 
   if (password !== user.password) {
-    console.log('❌ MOT DE PASSE INCORRECT');
+    console.log('MOT DE PASSE INCORRECT');
     return null;
   }
 
-  console.log('✅ AUTH OK');
+  console.log('AUTH OK');
 
   return jwt.sign(
     { email: user.email, name: user.name },
