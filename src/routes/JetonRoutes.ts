@@ -1,16 +1,30 @@
 import JetonService from '@src/services/JetonService';
-import User from '@src/models/User';
+import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
 import { IReq, IRes } from './common/types';
-import { parseReq } from './common/util';
 
-const Validators = {
-  generatetoken: parseReq({ userLogin: User.testlogin }),
-};
+interface IUserLogin {
+  email: string;
+  password: string;
+}
 
 async function generateToken(req: IReq, res: IRes) {
-  const { userLogin } = Validators.generatetoken(req.body);
-  const token = await JetonService.generateToken(userLogin);
-  return res.send({ token });
+  const { email, password } = req.body as unknown as IUserLogin;
+
+  if (!email || !password) {
+    return res
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .json({ error: 'Email et mot de passe requis' });
+  }
+
+  const token = await JetonService.generateToken({ email, password });
+
+  if (!token) {
+    return res
+      .status(HttpStatusCodes.UNAUTHORIZED)
+      .json({ error: 'Identifiants invalides' });
+  }
+
+  return res.json({ token });
 }
 
 export default {
