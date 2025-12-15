@@ -15,7 +15,7 @@ const options: Options = {
         description: 'Local',
       },
       {
-        url: 'https://refugedechat-csgthcd9dqc8cmdr.canadacentral-01.azurewebsites.net/api',
+        url: 'https://refugedechat2-cxd9cgfebzgch0gt.canadacentral-01.azurewebsites.net/api',
         description: 'Azure',
       },
     ],
