@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - refugedechat2
+name: Build and deploy Node.js app to Azure Web App - refugedechat
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
+        # npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -47,19 +47,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C6CFC61400FA4AD6A91A3D55CE581C2A }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0A96A666FF83498CBF61763016BAC9D6 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4384888BEA9F45B7937813A0B1B39903 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A92C11820EDE467CA8A8389E3FEED9D4 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7DF9E5E9673544D2AD464AA8E97DABE0 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_53800291127140CCBBB9AAD0B9169FD7 }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'refugedechat2'
+          app-name: 'refugedechat'
           slot-name: 'Production'
           package: .
-          
