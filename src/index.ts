@@ -16,6 +16,7 @@ const SERVER_START_MSG =
  ******************************************************************************/
 
 // Connexion MongoDB + démarrage du serveur
+console.log(ENV.Mongodb);
 connect(ENV.Mongodb)
   .then(() => {
     server.listen(ENV.Port, () => {
