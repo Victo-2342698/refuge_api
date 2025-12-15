@@ -3,7 +3,7 @@ import { IChatMongo } from '@src/models/Chat';
 
 export default {
   /* ---------------------------------------------------------
-     GET ALL (avec filtres optionnels sécurisés)
+     GET ALL 
   --------------------------------------------------------- */
   async getAll(filters?: any): Promise<IChatMongo[]> {
     const query: any = {};
@@ -30,7 +30,7 @@ export default {
   getOne: (id: string) => Chat.findById(id),
 
   /* ---------------------------------------------------------
-     GET FILTERED (même logique que getAll, séparé pour clarté)
+     GET FILTERED 
   --------------------------------------------------------- */
   async getFiltered(filters: any): Promise<IChatMongo[]> {
     const query: any = {};

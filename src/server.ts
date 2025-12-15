@@ -89,10 +89,6 @@ app.get('/', (_req: Request, res: Response) => {
 
 app.use(Paths.Base, BaseRouter);
 
-/******************************************************************************
- * Page HTML optionnelle (si tu veux garder /api-docs)
- ******************************************************************************/
-
 app.get('/api-docs', (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });

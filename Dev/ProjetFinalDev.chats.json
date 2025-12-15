@@ -1,0 +1,338 @@
+[{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1eb"
+  },
+  "nom": "Muscade",
+  "numeroDossier": 3392,
+  "dateMiseAdoption": "2025-11-20",
+  "tauxEnergie": 1,
+  "sociabiliteHumain": 5,
+  "compatEnfants": 4,
+  "compatChiens": 2,
+  "compatChats": 4,
+  "description": "Très affectueuse, adore les câlins et les humains.",
+  "race": "Domestique",
+  "dateNaissance": "2023-10-01",
+  "sexe": "Femelle",
+  "poids": "N/D",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 220,
+  "coutSterilisation": 250,
+  "coutVaccin": 104,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=1"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1ed"
+  },
+  "nom": "Simba",
+  "numeroDossier": 4123,
+  "dateMiseAdoption": "2025-10-02",
+  "tauxEnergie": 5,
+  "sociabiliteHumain": 4,
+  "compatEnfants": 3,
+  "compatChiens": 2,
+  "compatChats": 3,
+  "description": "Très joueur et énergique, adore grimper.",
+  "race": "Bengal",
+  "dateNaissance": "2021-08-21",
+  "sexe": "Mâle",
+  "poids": "5.2 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 300,
+  "coutSterilisation": 250,
+  "coutVaccin": 110,
+  "coutVermifuge": 40,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=3"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1ee"
+  },
+  "nom": "Choco",
+  "numeroDossier": 4329,
+  "dateMiseAdoption": "2025-09-20",
+  "tauxEnergie": 2,
+  "sociabiliteHumain": 5,
+  "compatEnfants": 5,
+  "compatChiens": 4,
+  "compatChats": 5,
+  "description": "Chat calme et doux, parfait pour famille tranquille.",
+  "race": "Persan",
+  "dateNaissance": "2020-06-12",
+  "sexe": "Mâle",
+  "poids": "4.3 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 250,
+  "coutSterilisation": 250,
+  "coutVaccin": 120,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=4"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1ef"
+  },
+  "nom": "Nala",
+  "numeroDossier": 4501,
+  "dateMiseAdoption": "2025-11-01",
+  "tauxEnergie": 4,
+  "sociabiliteHumain": 4,
+  "compatEnfants": 4,
+  "compatChiens": 3,
+  "compatChats": 3,
+  "description": "Très élégante et curieuse.",
+  "race": "Siamois",
+  "dateNaissance": "2022-12-18",
+  "sexe": "Femelle",
+  "poids": "3.9 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 260,
+  "coutSterilisation": 250,
+  "coutVaccin": 110,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=5"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1f0"
+  },
+  "nom": "Rocket",
+  "numeroDossier": 4687,
+  "dateMiseAdoption": "2025-11-05",
+  "tauxEnergie": 5,
+  "sociabiliteHumain": 3,
+  "compatEnfants": 3,
+  "compatChiens": 2,
+  "compatChats": 2,
+  "description": "Très rapide et sportif.",
+  "race": "Abyssin",
+  "dateNaissance": "2021-01-23",
+  "sexe": "Mâle",
+  "poids": "4.8 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 290,
+  "coutSterilisation": 250,
+  "coutVaccin": 110,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=6"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1f1"
+  },
+  "nom": "Mia",
+  "numeroDossier": 4750,
+  "dateMiseAdoption": "2025-10-25",
+  "tauxEnergie": 1,
+  "sociabiliteHumain": 5,
+  "compatEnfants": 5,
+  "compatChiens": 4,
+  "compatChats": 5,
+  "description": "Ultra calme et affectueuse.",
+  "race": "Ragdoll",
+  "dateNaissance": "2020-03-15",
+  "sexe": "Femelle",
+  "poids": "5.1 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 260,
+  "coutSterilisation": 250,
+  "coutVaccin": 105,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=7"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1f2"
+  },
+  "nom": "Shadow",
+  "numeroDossier": 4882,
+  "dateMiseAdoption": "2025-09-15",
+  "tauxEnergie": 4,
+  "sociabiliteHumain": 3,
+  "compatEnfants": 4,
+  "compatChiens": 2,
+  "compatChats": 4,
+  "description": "Mystérieux et très intelligent.",
+  "race": "Bombay",
+  "dateNaissance": "2021-07-30",
+  "sexe": "Mâle",
+  "poids": "4.5 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 240,
+  "coutSterilisation": 250,
+  "coutVaccin": 100,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=8"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1f3"
+  },
+  "nom": "Flocon",
+  "numeroDossier": 5021,
+  "dateMiseAdoption": "2025-11-18",
+  "tauxEnergie": 2,
+  "sociabiliteHumain": 5,
+  "compatEnfants": 5,
+  "compatChiens": 3,
+  "compatChats": 5,
+  "description": "Très doux, adore dormir sur les genoux.",
+  "race": "Turc Angora",
+  "dateNaissance": "2019-11-04",
+  "sexe": "Mâle",
+  "poids": "4.4 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 255,
+  "coutSterilisation": 250,
+  "coutVaccin": 110,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=11"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "691f6f033d3742abc91cb1f4"
+  },
+  "nom": "Caramel",
+  "numeroDossier": 5155,
+  "dateMiseAdoption": "2025-11-10",
+  "tauxEnergie": 3,
+  "sociabiliteHumain": 4,
+  "compatEnfants": 3,
+  "compatChiens": 4,
+  "compatChats": 3,
+  "description": "Très sociable et joueur.",
+  "race": "Scottish Fold",
+  "dateNaissance": "2020-08-09",
+  "sexe": "Mâle",
+  "poids": "4.9 kg",
+  "micropuce": true,
+  "degraffe": false,
+  "sterilise": true,
+  "vermifuge": true,
+  "vaccinsBase": true,
+  "coutTotal": 275,
+  "coutSterilisation": 250,
+  "coutVaccin": 90,
+  "coutVermifuge": 35,
+  "coutMicropuce": 51,
+  "photos": [
+    "https://loremflickr.com/400/300/cat?lock=12"
+  ],
+  "disponible": true
+},
+{
+  "_id": {
+    "$oid": "6932409af55ceb419354b635"
+  },
+  "nom": "Mimi",
+  "race": "Siamois",
+  "numeroDossier": 101,
+  "dateNaissance": {
+    "$date": "2020-05-12T00:00:00.000Z"
+  },
+  "tauxEnergie": 4,
+  "sociabiliteHumain": 5,
+  "compatEnfants": 3,
+  "compatChiens": 2,
+  "compatChats": 4,
+  "description": "Chat très gentil.",
+  "micropuce": true,
+  "sterilise": true,
+  "vaccinsBase": true,
+  "photos": [],
+  "created": {
+    "$date": "2025-12-05T02:16:58.324Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69374de0262f8aba161c381d"
+  },
+  "nom": "Minette",
+  "race": "Siamois",
+  "numeroDossier": 555,
+  "dateNaissance": {
+    "$date": "2022-04-10T00:00:00.000Z"
+  },
+  "tauxEnergie": 4,
+  "sociabiliteHumain": 5,
+  "compatEnfants": 3,
+  "compatChiens": 2,
+  "compatChats": 5,
+  "description": "Très gentille et calme",
+  "micropuce": true,
+  "sterilise": true,
+  "vaccinsBase": true,
+  "photos": [],
+  "created": {
+    "$date": "2025-12-08T22:14:56.124Z"
+  },
+  "__v": 0
+}]

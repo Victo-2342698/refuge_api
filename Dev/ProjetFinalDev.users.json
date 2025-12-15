@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "69323ce7742e34724978577f"
+  },
+  "email": "admin@example.com",
+  "password": "1234",
+  "name": "Admin",
+  "created": {
+    "$date": "2025-12-05T02:01:11.847Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6937505bd5b0601c9439af02"
+  },
+  "email": "test@example.com",
+  "password": "abcd",
+  "name": "Test User",
+  "created": {
+    "$date": "2025-12-08T22:25:31.389Z"
+  },
+  "__v": 0
+}]

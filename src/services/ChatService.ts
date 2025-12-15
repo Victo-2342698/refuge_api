@@ -7,7 +7,7 @@ export const CHAT_NOT_FOUND = 'Chat non trouvé';
 
 export default {
   /* ---------------------------------------------------------
-     GET ALL (avec filtres optionnels sécurisés)
+     GET ALL 
   --------------------------------------------------------- */
   getAll: (filters?: any) => {
     return ChatRepo.getAll(filters);
