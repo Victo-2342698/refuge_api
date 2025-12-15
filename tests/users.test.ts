@@ -12,18 +12,16 @@ describe('User Routes', () => {
     });
   });
 
-  /* ---------- GET ALL ---------- */
   describe('GET /users', () => {
-    it(`devrait retourner ${HttpStatusCodes.OK}`, async () => {
+    it(`retourne ${HttpStatusCodes.OK}`, async () => {
       const res = await agent.get('/users');
       expect(res.status).toBe(HttpStatusCodes.OK);
       expect(res.body.users.length).toBe(1);
     });
   });
 
-  /* ---------- POST ---------- */
   describe('POST /users', () => {
-    it(`devrait retourner ${HttpStatusCodes.CREATED}`, async () => {
+    it(`retourne ${HttpStatusCodes.CREATED}`, async () => {
       const res = await agent.post('/users').send({
         email: 'new@test.com',
         password: 'abc',
@@ -32,7 +30,7 @@ describe('User Routes', () => {
       expect(res.status).toBe(HttpStatusCodes.CREATED);
     });
 
-    it(`devrait retourner ${HttpStatusCodes.BAD_REQUEST} si un champ est manquant`, async () => {
+    it(`retourne ${HttpStatusCodes.BAD_REQUEST} si champ manquant`, async () => {
       const res = await agent.post('/users').send({
         email: '',
         password: 'abc',
@@ -43,9 +41,8 @@ describe('User Routes', () => {
     });
   });
 
-  /* ---------- PUT ---------- */
   describe('PUT /users', () => {
-    it(`devrait retourner ${HttpStatusCodes.OK}`, async () => {
+    it(`retourne ${HttpStatusCodes.OK}`, async () => {
       const res = await agent.put('/users').send({
         email: 'marwa@test.com',
         password: 'newpass',
@@ -54,7 +51,7 @@ describe('User Routes', () => {
       expect(res.status).toBe(HttpStatusCodes.OK);
     });
 
-    it(`devrait retourner ${HttpStatusCodes.BAD_REQUEST} si email est manquant`, async () => {
+    it(`retourne ${HttpStatusCodes.BAD_REQUEST} si email manquant`, async () => {
       const res = await agent.put('/users').send({
         email: '',
         password: 'abc',
@@ -65,14 +62,13 @@ describe('User Routes', () => {
     });
   });
 
-  /* ---------- DELETE ---------- */
   describe('DELETE /users/:email', () => {
-    it(`devrait retourner ${HttpStatusCodes.OK}`, async () => {
+    it(`retourne ${HttpStatusCodes.OK}`, async () => {
       const res = await agent.delete('/users/marwa@test.com');
       expect(res.status).toBe(HttpStatusCodes.OK);
     });
 
-    it(`devrait retourner ${HttpStatusCodes.BAD_REQUEST} si email manquant`, async () => {
+    it(`retourne ${HttpStatusCodes.BAD_REQUEST} si email manquant`, async () => {
       const res = await agent.delete('/users/');
       expect(res.status).toBe(HttpStatusCodes.BAD_REQUEST);
     });

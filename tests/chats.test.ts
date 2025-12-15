@@ -28,7 +28,13 @@ const DB_CHATS = [
     micropuce: true,
     sterilise: true,
     vaccinsBase: true,
-    photos: [],
+    disponible: true,
+    poids: 4,
+    coutTotal: 300,
+    coutSterilisation: 150,
+    coutVaccin: 100,
+    coutVermifuge: 50,
+    photos: ['https://test.com/mina.jpg'],
   },
 ];
 
@@ -60,6 +66,21 @@ describe('chatRouter', () => {
   });
 
   /* ------------------------------------------------------------------------
+     GET AVEC FILTRES
+  ------------------------------------------------------------------------- */
+  describe(`GET ${Paths.Chats.Get} avec filtres`, () => {
+    it(`filtre par race`, async () => {
+      const res = await agent.get(
+        insertUrlParams(Paths.Chats.Get, { race: 'Siamois' }),
+      );
+
+      expect(res.status).toBe(HttpStatusCodes.OK);
+      expect(res.body.data.length).toBeGreaterThan(0);
+      expect(res.body.data[0].race).toBe('Siamois');
+    });
+  });
+
+  /* ------------------------------------------------------------------------
      GET ONE
   ------------------------------------------------------------------------- */
   describe(`GET ${Paths.Chats.GetOne}`, () => {
@@ -87,6 +108,15 @@ describe('chatRouter', () => {
       const res = await agent.post(Paths.Chats.Add).send(DB_CHATS[0]);
       expect(res.status).toBe(HttpStatusCodes.CREATED);
       expect(res.body.chat.nom).toBe('Mina');
+    });
+
+    it(`retourne ${HttpStatusCodes.BAD_REQUEST} si champ requis manquant`, async () => {
+      const res = await agent.post(Paths.Chats.Add).send({
+        race: 'Siamois',
+      });
+
+      expect(res.status).toBe(HttpStatusCodes.BAD_REQUEST);
+      expect(res.body.error).toBeDefined();
     });
   });
 

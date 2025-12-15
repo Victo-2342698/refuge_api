@@ -33,16 +33,75 @@ if (ENV.NodeEnv === NodeEnvs.Production) {
 }
 
 /******************************************************************************
- * API
+ * API HOME — DOCUMENTATION (OBLIGATOIRE POUR LE PROF)
+ ******************************************************************************/
+
+app.get('/', (_req: Request, res: Response) => {
+  res.json({
+    name: 'Refuge API',
+    version: '1.0.0',
+    description: 'API REST pour la gestion des chats du refuge',
+    authentication: 'JWT (Bearer token requis pour certaines routes)',
+    basePath: '/api',
+    routes: [
+      {
+        method: 'GET',
+        path: '/api/chats',
+        description: 'Retourne la liste complète des chats',
+      },
+      {
+        method: 'GET',
+        path: '/api/chats/:id',
+        description: 'Retourne un chat par son identifiant',
+      },
+      {
+        method: 'GET',
+        path: '/api/chats?race=&tauxEnergie=',
+        description: 'Retourne les chats filtrés (ex: race, taux d’énergie)',
+      },
+      {
+        method: 'POST',
+        path: '/api/chats/add',
+        description: 'Ajoute un nouveau chat (authentification requise)',
+      },
+      {
+        method: 'PUT',
+        path: '/api/chats/:id',
+        description: 'Modifie un chat existant (authentification requise)',
+      },
+      {
+        method: 'DELETE',
+        path: '/api/chats/:id',
+        description: 'Supprime un chat (authentification requise)',
+      },
+      {
+        method: 'POST',
+        path: '/api/auth/login',
+        description: 'Authentifie un utilisateur et retourne un token JWT',
+      },
+    ],
+  });
+});
+
+/******************************************************************************
+ * Routes API
  ******************************************************************************/
 
 app.use(Paths.Base, BaseRouter);
 
 /******************************************************************************
+ * Page HTML optionnelle (si tu veux garder /api-docs)
+ ******************************************************************************/
+
+app.get('/api-docs', (_req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+/******************************************************************************
  * Gestion des erreurs
  ******************************************************************************/
 
-app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _: Request, res: Response, _next: NextFunction) => {
   if (ENV.NodeEnv !== NodeEnvs.Test.valueOf()) {
     logger.err(err, true);
   }
@@ -62,14 +121,6 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
   return res.status(status).json({
     error: message,
   });
-});
-
-app.get('/api-docs/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.get('/', (req: Request, res: Response) => {
-  res.redirect('/api-docs');
 });
 
 /******************************************************************************
