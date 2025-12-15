@@ -13,12 +13,10 @@ declare global {
 }
 
 const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-  // Routes d'authentnihification sont publiques
   if (req.originalUrl.startsWith('/api/auth')) {
     return next();
   }
 
-  // GET publics
   if (req.method === 'GET') {
     return next();
   }

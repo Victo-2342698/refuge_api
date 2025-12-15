@@ -15,28 +15,25 @@ import { Document } from 'mongoose';
 
 const DB_CHATS = [
   {
-    message: 'Bonjour',
-    auteur: 'Marwa',
+    nom: 'Mina',
     race: 'Siamois',
+    numeroDossier: 1001,
+    dateNaissance: new Date('2023-01-01'),
     tauxEnergie: 5,
-  },
-  {
-    message: 'Salut',
-    auteur: 'Prof',
-    race: 'Persan',
-    tauxEnergie: 2,
-  },
-  {
-    message: 'Allo',
-    auteur: 'Étienne',
-    race: 'Siamois',
-    tauxEnergie: 8,
+    sociabiliteHumain: 4,
+    compatEnfants: 3,
+    compatChiens: 2,
+    compatChats: 5,
+    description: 'Chat très affectueux et calme.',
+    micropuce: true,
+    sterilise: true,
+    vaccinsBase: true,
+    photos: [],
   },
 ];
 
-// Compare properties (même logique que le cours)
 const compareChatArrays = customDeepCompare({
-  onlyCompareProps: ['message', 'auteur', 'race', 'tauxEnergie'],
+  onlyCompareProps: ['nom', 'race', 'numeroDossier'],
 });
 
 /******************************************************************************
@@ -54,8 +51,8 @@ describe('chatRouter', () => {
   /* ------------------------------------------------------------------------
      GET ALL
   ------------------------------------------------------------------------- */
-  describe(`'GET:${Paths.Chats.Get}'`, () => {
-    it(`doit retourner toutes les entrées et ${HttpStatusCodes.OK} si réussi.`, async () => {
+  describe(`GET ${Paths.Chats.Get}`, () => {
+    it(`retourne ${HttpStatusCodes.OK}`, async () => {
       const res = await agent.get(Paths.Chats.Get);
       expect(res.status).toBe(HttpStatusCodes.OK);
       expect(compareChatArrays(res.body.data, DB_CHATS)).toBeTruthy();
@@ -65,15 +62,15 @@ describe('chatRouter', () => {
   /* ------------------------------------------------------------------------
      GET ONE
   ------------------------------------------------------------------------- */
-  describe(`'GET:${Paths.Chats.GetOne}'`, () => {
-    it(`doit retourner un chat et ${HttpStatusCodes.OK} si trouvé.`, async () => {
+  describe(`GET ${Paths.Chats.GetOne}`, () => {
+    it(`retourne un chat`, async () => {
       const id = dbChats[0]._id.toString();
       const res = await agent.get(Paths.Chats.GetOne.replace(':id', id));
       expect(res.status).toBe(HttpStatusCodes.OK);
       expect(res.body.data._id).toBe(id);
     });
 
-    it(`doit retourner ${HttpStatusCodes.NOT_FOUND} si introuvable.`, async () => {
+    it(`retourne ${HttpStatusCodes.NOT_FOUND}`, async () => {
       const res = await agent.get(
         Paths.Chats.GetOne.replace(':id', '000000000000000000000000'),
       );
@@ -85,41 +82,33 @@ describe('chatRouter', () => {
   /* ------------------------------------------------------------------------
      POST
   ------------------------------------------------------------------------- */
-  describe(`'POST:${Paths.Chats.Add}'`, () => {
-    it(`doit retourner ${HttpStatusCodes.CREATED} si l'ajout réussit.`, async () => {
-      const chat = {
-        message: 'Nouveau chat',
-        auteur: 'Testeur',
-        race: 'Bengal',
-        tauxEnergie: 7,
-      };
-
-      const res = await agent.post(Paths.Chats.Add).send(chat);
-
+  describe(`POST ${Paths.Chats.Add}`, () => {
+    it(`retourne ${HttpStatusCodes.CREATED}`, async () => {
+      const res = await agent.post(Paths.Chats.Add).send(DB_CHATS[0]);
       expect(res.status).toBe(HttpStatusCodes.CREATED);
-      expect(res.body.chat.message).toBe('Nouveau chat');
+      expect(res.body.chat.nom).toBe('Mina');
     });
   });
 
   /* ------------------------------------------------------------------------
      PUT
   ------------------------------------------------------------------------- */
-  describe(`'PUT:${Paths.Chats.Update}'`, () => {
-    it(`doit retourner ${HttpStatusCodes.OK} si la mise à jour réussit.`, async () => {
+  describe(`PUT ${Paths.Chats.Update}`, () => {
+    it(`retourne ${HttpStatusCodes.OK}`, async () => {
       const id = dbChats[0]._id.toString();
 
       const res = await agent
         .put(Paths.Chats.Update.replace(':id', id))
-        .send({ message: 'Modifié' });
+        .send({ ...DB_CHATS[0], description: 'Description modifiée valide.' });
 
       expect(res.status).toBe(HttpStatusCodes.OK);
-      expect(res.body.chat.message).toBe('Modifié');
+      expect(res.body.chat.description).toContain('modifiée');
     });
 
-    it(`doit retourner ${HttpStatusCodes.NOT_FOUND} si id introuvable.`, async () => {
+    it(`retourne ${HttpStatusCodes.NOT_FOUND}`, async () => {
       const res = await agent
         .put(Paths.Chats.Update.replace(':id', '000000000000000000000000'))
-        .send({ message: 'Test' });
+        .send(DB_CHATS[0]);
 
       expect(res.status).toBe(HttpStatusCodes.NOT_FOUND);
       expect(res.body.error).toBe(CHAT_NOT_FOUND);
@@ -129,16 +118,16 @@ describe('chatRouter', () => {
   /* ------------------------------------------------------------------------
      DELETE
   ------------------------------------------------------------------------- */
-  describe(`'DELETE:${Paths.Chats.Delete}'`, () => {
+  describe(`DELETE ${Paths.Chats.Delete}`, () => {
     const getPath = (id: string) => insertUrlParams(Paths.Chats.Delete, { id });
 
-    it(`doit retourner ${HttpStatusCodes.OK} si suppression réussie.`, async () => {
+    it(`retourne ${HttpStatusCodes.OK}`, async () => {
       const id = dbChats[0]._id.toString();
       const res = await agent.delete(getPath(id));
       expect(res.status).toBe(HttpStatusCodes.OK);
     });
 
-    it(`doit retourner ${HttpStatusCodes.NOT_FOUND} si id introuvable.`, async () => {
+    it(`retourne ${HttpStatusCodes.NOT_FOUND}`, async () => {
       const res = await agent.delete(getPath('000000000000000000000000'));
       expect(res.status).toBe(HttpStatusCodes.NOT_FOUND);
       expect(res.body.error).toBe(CHAT_NOT_FOUND);

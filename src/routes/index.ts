@@ -5,7 +5,7 @@ import ChatRoutes from './ChatRoutes';
 import UserRoutes from './UserRoutes';
 import AuthRoutes from './AuthRoutes';
 
-import authenticateToken from '@src/services/authenticateToken';
+import authenticateToken from '@src/middleware/authMiddleware';
 
 const apiRouter = Router();
 
@@ -23,12 +23,10 @@ apiRouter.use(Paths.Auth.Base, authRouter);
 /* --------------------------- CHATS --------------------------- */
 const chatRouter = Router();
 
-// GET — NON PROTÉGÉS
 chatRouter.get(Paths.Chats.Get, ChatRoutes.getAll);
 chatRouter.get('/', ChatRoutes.getFiltered);
 chatRouter.get(Paths.Chats.GetOne, ChatRoutes.getOne);
 
-// POST, PUT, DELETE — PROTÉGÉS
 chatRouter.post(Paths.Chats.Add, authenticateToken, ChatRoutes.add);
 chatRouter.put(Paths.Chats.Update, authenticateToken, ChatRoutes.update);
 chatRouter.delete(Paths.Chats.Delete, authenticateToken, ChatRoutes.delete);
