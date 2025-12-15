@@ -12,13 +12,15 @@ import ENV from '@src/common/constants/ENV';
 import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
 import { RouteError } from '@src/common/util/route-errors';
 import { NodeEnvs } from '@src/common/constants';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './docs/swagger';
 
 const app = express();
 
 /******************************************************************************
  * Middleware
  ******************************************************************************/
-
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -88,10 +90,6 @@ app.get('/', (_req: Request, res: Response) => {
  ******************************************************************************/
 
 app.use(Paths.Base, BaseRouter);
-
-app.get('/api-docs', (_req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 /******************************************************************************
  * Gestion des erreurs
