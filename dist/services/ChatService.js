@@ -9,7 +9,9 @@ const route_errors_1 = require("@src/common/util/route-errors");
 const HttpStatusCodes_1 = __importDefault(require("@src/common/constants/HttpStatusCodes"));
 exports.CHAT_NOT_FOUND = 'Chat non trouvé';
 exports.default = {
-    getAll: (filters) => ChatRepo_1.default.getAll(filters),
+    getAll: (filters) => {
+        return ChatRepo_1.default.getAll(filters);
+    },
     getOne: async (id) => {
         const chat = await ChatRepo_1.default.getOne(id);
         if (!chat) {
@@ -17,7 +19,9 @@ exports.default = {
         }
         return chat;
     },
-    getFiltered: (filters) => ChatRepo_1.default.getFiltered(filters),
+    getFiltered: (filters) => {
+        return ChatRepo_1.default.getFiltered(filters);
+    },
     addOne: (chat) => ChatRepo_1.default.add(chat),
     updateOne: async (id, chat) => {
         const exists = await ChatRepo_1.default.getOne(id);

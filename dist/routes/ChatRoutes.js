@@ -11,6 +11,7 @@ exports.update = update;
 exports.delete_ = delete_;
 const ChatService_1 = __importDefault(require("@src/services/ChatService"));
 const HttpStatusCodes_1 = __importDefault(require("@src/common/constants/HttpStatusCodes"));
+const chatValidator_1 = require("@src/validators/chatValidator");
 async function getAll(req, res, next) {
     try {
         const chats = await ChatService_1.default.getAll(req.query);
@@ -44,6 +45,7 @@ async function getOne(req, res, next) {
 }
 async function add(req, res, next) {
     try {
+        (0, chatValidator_1.validateChat)(req.body);
         const created = await ChatService_1.default.addOne(req.body);
         res
             .status(HttpStatusCodes_1.default.CREATED)
