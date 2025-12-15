@@ -42,3 +42,9 @@ cd refuge_api
 npm install
 npm run dev
 ```
+
+```bash
+mongoimport --uri "$MONGODB_URI" --collection users --file Dev/ProjetFinalDev.users.json --jsonArray
+mongoimport --uri "$MONGODB_URI" --collection chats --file Dev/ProjetFinalDev.chats.json --jsonArray
+
+```

@@ -41,7 +41,6 @@ const swaggerDocument = YAML.load(path.join(__dirname, 'api.yaml'));
 
 app.use('/apiDocs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Redirection racine vers Swagger (comme ton ami)
 app.get('/', (_req: Request, res: Response) => {
   res.redirect('/apiDocs');
 });
