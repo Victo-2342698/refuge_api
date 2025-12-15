@@ -1,336 +1,264 @@
-openapi: 3.0.3
+openapi: 3.0.0
+
 info:
-  title: API Refuge - Gestion des Chats
+  title: API Refuge de chats
+  description: API REST – Projet Dev Web 3
   version: 1.0.0
-  description: >
-    API REST permettant de gérer les chats du refuge.
-    Les routes POST / PUT / DELETE sont protégées par un jeton JWT.
 
 servers:
-  - url: http://localhost:3000
-    description: Serveur local (développement)
+  - url: https://refugedechat-csgthcd9dqc8cmdr.canadacentral-01.azurewebsites.net/api
+
+tags:
+  - name: Auth
+  - name: Chats
+  - name: Users
 
 paths:
 
-  /api/auth/generatetoken:
+  /auth/generatetoken:
     post:
       tags:
-        - Authentification
-      summary: Générer un jeton JWT
-      description: >
-        Retourne un jeton JWT pour un chat si le login est valide.
-        Identifiants : numeroDossier + nom.
+        - Auth
+      summary: Générer un token JWT
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChatLogin'
-            example:
-              numeroDossier: 3392
-              nom: Muscade
+              $ref: '#/components/schemas/UserLogin'
       responses:
         '200':
-          description: Jeton généré avec succès
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthResponse'
-        '400':
-          description: Requête invalide
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Identifiants invalides
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          description: Token généré avec succès
 
-  /api/chats:
+  /chats:
     get:
       tags:
         - Chats
-      summary: Lister tous les chats
-      description: >
-        Retourne la liste complète des chats du refuge.
-        Possibilité d’appliquer des filtres via la query string.
+      summary: Récupérer tous les chats (avec filtres)
       parameters:
-        - name: disponible
-          in: query
+        - in: query
+          name: race
           required: false
           schema:
-            type: boolean
-          description: Filtrer par disponibilité (true / false)
-        - name: tauxEnergie
-          in: query
+            type: string
+          description: Filtrer par race du chat
+        - in: query
+          name: tauxEnergie
           required: false
           schema:
             type: number
             minimum: 1
             maximum: 5
-          description: Filtrer par taux d'énergie
-        - name: race
-          in: query
-          required: false
-          schema:
-            type: string
-          description: Filtrer par race
+          description: Filtrer par taux d’énergie
       responses:
         '200':
-          description: Liste des chats retournée avec succès
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Chat'
-        '500':
-          description: Erreur interne du serveur
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          description: Liste des chats
 
+  /chats/add:
     post:
       tags:
         - Chats
-      summary: Ajouter un nouveau chat
-      description: >
-        Ajoute un chat dans la base de données.
-        Route protégée par JWT.
+      summary: Ajouter un chat
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChatInput'
+              $ref: '#/components/schemas/Chat'
       responses:
         '201':
           description: Chat créé avec succès
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatCreatedResponse'
-        '400':
-          description: Données invalides (validation Mongoose)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Jeton invalide ou expiré
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
 
-  /api/chats/{id}:
+  /chats/{id}:
     get:
       tags:
         - Chats
-      summary: Obtenir un chat par ID
-      description: Retourne les informations d’un chat via son identifiant MongoDB.
+      summary: Récupérer un chat par ID
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: id
           required: true
           schema:
             type: string
-          description: ID MongoDB du chat
       responses:
         '200':
           description: Chat trouvé
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatResponse'
         '404':
           description: Chat non trouvé
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
 
     put:
       tags:
         - Chats
-      summary: Mettre à jour un chat
-      description: >
-        Met à jour les informations d’un chat existant.
-        Route protégée par JWT.
+      summary: Modifier un chat
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: id
           required: true
           schema:
             type: string
-          description: ID MongoDB du chat
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChatInput'
+              $ref: '#/components/schemas/Chat'
       responses:
         '200':
-          description: Chat mis à jour avec succès
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatUpdatedResponse'
-        '400':
-          description: Données invalides
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '404':
-          description: Chat non trouvé
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat modifié avec succès
 
     delete:
       tags:
         - Chats
       summary: Supprimer un chat
-      description: >
-        Supprime un chat existant.
-        Route protégée par JWT.
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: id
           required: true
           schema:
             type: string
-          description: ID MongoDB du chat
       responses:
         '200':
           description: Chat supprimé avec succès
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteResponse'
-        '404':
-          description: Chat non trouvé
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Récupérer tous les utilisateurs
+      responses:
+        '200':
+          description: Liste des utilisateurs
+
+    post:
+      tags:
+        - Users
+      summary: Ajouter un utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Utilisateur créé avec succès
+
+    put:
+      tags:
+        - Users
+      summary: Modifier un utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Utilisateur modifié avec succès
+
+  /users/{email}:
+    delete:
+      tags:
+        - Users
+      summary: Supprimer un utilisateur
+      parameters:
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Utilisateur supprimé avec succès
 
 components:
 
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
 
   schemas:
 
-    ChatLogin:
+    UserLogin:
       type: object
-      required: [numeroDossier, nom]
+      required:
+        - email
+        - password
       properties:
-        numeroDossier:
-          type: number
-          example: 3392
-        nom:
+        email:
           type: string
-          example: Muscade
+        password:
+          type: string
+
+    User:
+      type: object
+      required:
+        - email
+        - password
+        - name
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
 
     Chat:
       type: object
-      properties:
-        _id:
-          type: string
-        numeroDossier:
-          type: number
-        nom:
-          type: string
-        race:
-          type: string
-        dateNaissance:
-          type: string
-          format: date
-        tauxEnergie:
-          type: number
-        sociabiliteHumain:
-          type: number
-        compatEnfants:
-          type: number
-        compatChiens:
-          type: number
-        compatChats:
-          type: number
-        description:
-          type: string
-        micropuce:
-          type: boolean
-        sterilise:
-          type: boolean
-        vaccinsBase:
-          type: boolean
-        photos:
-          type: array
-          items:
-            type: string
-        disponible:
-          type: boolean
-        created:
-          type: string
-          format: date-time
-
-    ChatInput:
-      type: object
       required:
-        - numeroDossier
         - nom
         - race
+        - numeroDossier
         - dateNaissance
         - tauxEnergie
         - sociabiliteHumain
+        - compatEnfants
+        - compatChiens
+        - compatChats
         - description
         - micropuce
         - sterilise
         - vaccinsBase
-        - photos
       properties:
-        numeroDossier:
-          type: number
         nom:
           type: string
         race:
           type: string
+        numeroDossier:
+          type: number
         dateNaissance:
           type: string
           format: date
         tauxEnergie:
           type: number
+          minimum: 1
+          maximum: 5
         sociabiliteHumain:
           type: number
+          minimum: 1
+          maximum: 5
         compatEnfants:
           type: number
+          minimum: 1
+          maximum: 5
         compatChiens:
           type: number
+          minimum: 1
+          maximum: 5
         compatChats:
           type: number
+          minimum: 1
+          maximum: 5
         description:
           type: string
         micropuce:
@@ -343,62 +271,3 @@ components:
           type: array
           items:
             type: string
-        disponible:
-          type: boolean
-
-    ChatResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        data:
-          $ref: '#/components/schemas/Chat'
-
-    ChatCreatedResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: Chat créé avec succès.
-        data:
-          $ref: '#/components/schemas/Chat'
-
-    ChatUpdatedResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: Chat mis à jour avec succès.
-        data:
-          $ref: '#/components/schemas/Chat'
-
-    DeleteResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: Chat supprimé avec succès.
-
-    AuthResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          example: eyJhbGciOiJIUzI1NiIsInR5cC...
-
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Message d'erreur en français.
