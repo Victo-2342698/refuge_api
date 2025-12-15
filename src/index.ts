@@ -9,7 +9,7 @@ import server from './server';
  ******************************************************************************/
 
 const SERVER_START_MSG =
-  'Express server started on port: ' + ENV.Port.toString();
+  'Express server started on port: ' + ENV.PORT.toString();
 
 /******************************************************************************
  * Run
@@ -17,12 +17,12 @@ const SERVER_START_MSG =
 
 // Connexion MongoDB + démarrage du serveur
 console.log('stp fonctionne');
-console.log(ENV.Mongodb);
+console.log(ENV.MONGODB);
 console.log('stp fonctionne');
 
-connect(ENV.Mongodb)
+connect(ENV.MONGODB)
   .then(() => {
-    server.listen(ENV.Port, () => {
+    server.listen(ENV.PORT, () => {
       logger.info(SERVER_START_MSG);
     });
   })
