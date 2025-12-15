@@ -7,10 +7,10 @@ import { NodeEnvs } from '.';
 ******************************************************************************/
 
 const ENV = jetEnv({
-  NODE_ENV: isEnumVal(NodeEnvs),
-  PORT: num,
-  MONGODB: str,
-  JWTSECRET: str,
+  NodeEnv: isEnumVal(NodeEnvs),
+  Port: num,
+  Mongodb: str,
+  Jwtsecret: str,
 });
 
 /******************************************************************************
