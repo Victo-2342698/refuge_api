@@ -33,7 +33,7 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
     );
   }
 
-  const jwtsecret = ENV.JWTSECRET;
+  const jwtsecret = ENV.Jwtsecret;
 
   if (!jwtsecret) {
     return next(

@@ -2,11 +2,16 @@ import jetEnv, { num, str } from 'jet-env';
 import { isEnumVal } from 'jet-validators';
 import { NodeEnvs } from '.';
 
+console.log('Node:', process.env.NODE_ENV);
+console.log('Port:', process.env.PORT);
+console.log('Mongo:', process.env.MONGODB);
+console.log('JWT:', process.env.JWTSECRET);
+
 const ENV = jetEnv({
-  NODE_ENV: isEnumVal(NodeEnvs),
-  PORT: num,
-  MONGODB: str,
-  JWTSECRET: str,
+  NodeEnv: isEnumVal(NodeEnvs),
+  Port: num,
+  Mongodb: str,
+  Jwtsecret: str,
 });
 
 export default ENV;
