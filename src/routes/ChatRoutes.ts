@@ -69,8 +69,6 @@ export async function add(req: Request, res: Response, next: NextFunction) {
 --------------------------------------------------------- */
 export async function update(req: Request, res: Response, next: NextFunction) {
   try {
-    validateChat(req.body);
-
     const updated = await ChatService.updateOne(
       req.params.id,
       req.body as IChatMongo,

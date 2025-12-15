@@ -55,10 +55,10 @@ export default {
   add: (chat: IChatMongo) => Chat.create(chat),
 
   /* ---------------------------------------------------------
-     UPDATE
+     UPDATE  ✅ CORRIGÉ
   --------------------------------------------------------- */
-  update: (id: string, chat: IChatMongo) =>
-    Chat.findByIdAndUpdate(id, chat, { new: true }),
+  update: (id: string, chat: Partial<IChatMongo>) =>
+    Chat.findByIdAndUpdate(id, { $set: chat }, { new: true }),
 
   /* ---------------------------------------------------------
      DELETE
