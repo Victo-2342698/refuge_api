@@ -6,17 +6,31 @@ export function validateChat(chat: Partial<IChatMongo>) {
   const requiredFields: (keyof IChatMongo)[] = [
     'nom',
     'race',
+    'sexe',
+    'poids',
     'numeroDossier',
     'dateNaissance',
+
     'tauxEnergie',
     'sociabiliteHumain',
     'compatEnfants',
     'compatChiens',
     'compatChats',
+
     'description',
+
     'micropuce',
     'sterilise',
+    'degraffe',
+    'vermifuge',
     'vaccinsBase',
+    'disponible',
+
+    'coutTotal',
+    'coutSterilisation',
+    'coutVaccin',
+    'coutVermifuge',
+    'coutMicropuce',
   ];
 
   for (const field of requiredFields) {
