@@ -6,7 +6,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: https://refugedechat-csgthcd9dqc8cmdr.canadacentral-01.azurewebsites.net/api
+  - url: https://refugedechat2-csgthcd9dqc8cmdr.canadacentral-01.azurewebsites.net/api
 
 tags:
   - name: Auth
@@ -14,7 +14,6 @@ tags:
   - name: Users
 
 paths:
-
   /auth/generatetoken:
     post:
       tags:
@@ -179,7 +178,6 @@ paths:
           description: Utilisateur supprimé avec succès
 
 components:
-
   securitySchemes:
     bearerAuth:
       type: http
@@ -187,7 +185,6 @@ components:
       bearerFormat: JWT
 
   schemas:
-
     UserLogin:
       type: object
       required:
