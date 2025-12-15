@@ -13,14 +13,13 @@ import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
 import { RouteError } from '@src/common/util/route-errors';
 import { NodeEnvs } from '@src/common/constants';
 import swaggerUi from 'swagger-ui-express';
-import { swaggerSpec } from './docs/swagger';
+import YAML from 'yamljs';
 
 const app = express();
 
 /******************************************************************************
  * Middleware
  ******************************************************************************/
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,54 +34,16 @@ if (ENV.NodeEnv === NodeEnvs.Production) {
 }
 
 /******************************************************************************
- * API HOME — DOCUMENTATION (OBLIGATOIRE POUR LE PROF)
+ * Swagger UI (documentation API)
  ******************************************************************************/
 
+const swaggerDocument = YAML.load(path.join(__dirname, 'api.yaml'));
+
+app.use('/apiDocs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Redirection racine vers Swagger (comme ton ami)
 app.get('/', (_req: Request, res: Response) => {
-  res.json({
-    name: 'Refuge API',
-    version: '1.0.0',
-    description: 'API REST pour la gestion des chats du refuge',
-    authentication: 'JWT (Bearer token requis pour certaines routes)',
-    basePath: '/api',
-    routes: [
-      {
-        method: 'GET',
-        path: '/api/chats',
-        description: 'Retourne la liste complète des chats',
-      },
-      {
-        method: 'GET',
-        path: '/api/chats/:id',
-        description: 'Retourne un chat par son identifiant',
-      },
-      {
-        method: 'GET',
-        path: '/api/chats?race=&tauxEnergie=',
-        description: 'Retourne les chats filtrés (ex: race, taux d’énergie)',
-      },
-      {
-        method: 'POST',
-        path: '/api/chats/add',
-        description: 'Ajoute un nouveau chat (authentification requise)',
-      },
-      {
-        method: 'PUT',
-        path: '/api/chats/:id',
-        description: 'Modifie un chat existant (authentification requise)',
-      },
-      {
-        method: 'DELETE',
-        path: '/api/chats/:id',
-        description: 'Supprime un chat (authentification requise)',
-      },
-      {
-        method: 'POST',
-        path: '/api/auth/login',
-        description: 'Authentifie un utilisateur et retourne un token JWT',
-      },
-    ],
-  });
+  res.redirect('/apiDocs');
 });
 
 /******************************************************************************
