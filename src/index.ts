@@ -17,7 +17,6 @@ const SERVER_START_MSG =
 
 // Connexion MongoDB + démarrage du serveur
 console.log('stp fonctionne');
-
 console.log(ENV.Mongodb);
 console.log('stp fonctionne');
 
